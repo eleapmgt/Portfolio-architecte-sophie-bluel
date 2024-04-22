@@ -1,10 +1,10 @@
-import { logButton } from "./global.js";
+const log = document.querySelector(`a[href="login.html"]`);
 
 // Gestion des erreurs
 const errorLogin = document.querySelector(".errorLogin");
 
-// Désactiver le lien cliquable de login
-const loginLink = document.querySelector(`a[href="pages/login.html"]`);
+// Au clic, désactivation du lien cliquable de login
+const loginLink = document.querySelector(`a[href="login.html"]`);
 loginLink.addEventListener("click", (event) => {
   event.preventDefault();
 });
@@ -22,7 +22,7 @@ form.addEventListener("submit", (event) => {
   login(userData);
 });
 
-// Fonction pour s'authentifier
+// Fonction pour s'authentifier qu'il faut mettre dans un gestionnaire d'évènement onsubmit
 async function login(userData) {
   try {
     const response = await fetch("http://localhost:5678/api/users/login", {
@@ -38,12 +38,8 @@ async function login(userData) {
       }
     const data = await response.json();
     localStorage.setItem("token", data.token);
-    window.location.href = "../index.html";
+    window.location.href = "./index.html";
   } catch (err) {
     errorLogin.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${err.message}`;
   };
 };
-
-// Affichage du bouton login ou logout
-const log = document.querySelector(`a[href="pages/login.html"]`);
-logButton(log);

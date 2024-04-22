@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+  <script src="https://kit.fontawesome.com/f1083a9e59.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
@@ -17,7 +18,7 @@
 		<ul>
 			<li><a href="#">projets</a></li>
 			<li><a href="#">contact</a></li>
-			<li><a href="pages/login.html" id="logout"></a></li>
+			<li><a href="login.html" id="logout"></a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -35,7 +36,9 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+    <div class="my-projects">
+      <h2>Mes Projets</h2>
+    </div>
     <div class="filters">
     </div>
     <div class="gallery">
@@ -57,12 +60,67 @@
 </main>
 
 <footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
+  <div class="footer">
+    <nav>
+      <ul>
+        <li>Mentions Légales</li>
+      </ul>
+    </nav>
+  </div>
 </footer>
-<script type="module" src="./scripts/main.js"></script>
+
+<aside id="modal" aria-hidden="true" role="dialog" aria-labelledby="modaltitle" style="display:none">
+  <!-- Modal page 1 -->
+  <div id="modal-gallery" class="modal-wrapper modal-stop modal-photo-gallery">
+    <div class="closeModalBtn">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+    <h3 id="modaltitle">Galerie photo</h3>
+    <div class="admin-gallery">
+    </div>
+    <hr>
+    <button class="submitBtn add-photo-btn">Ajouter une photo</button>
+  </div>
+  <!-- Modal page 2 -->
+  <div id="modal-add" class="modal-wrapper modal-stop modal-add-photo">
+    <div class="modal-header-icons">
+      <div class="arrow-backward">
+        <i class="fa-solid fa-arrow-left"></i>
+      </div>
+      <div class="closeModalBtn">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </div>
+    <h3 id="modaltitle">Ajout photo</h3>
+    <form action="POST" class="add-photo-form">
+      <div class="form-group form-input-photo">
+        <div class="input-photo-infos">
+          <i class="fa-regular fa-image" style="color: #b9c5cc;"></i>
+          <label for="photoInput">+ Ajouter photo</label>
+          <input type="file" id="photoInput" name="photo" style="display: none;" accept="image/*">
+          <p>jpg, png : 4mo max</p>
+      </div>
+      </div>
+      <div class="form-group-inputs">
+      <div class="form-group">
+        <label for="titleInput">Titre</label>
+        <input type="text" id="titleInput" name="title">
+      </div>
+      <div class="form-group">
+        <label for="categorySelect">Catégorie</label>
+        <select id="categorySelect" name="category">
+          <option value="1">Objets</option>
+          <option value="2">Appartements</option>
+          <option value="3">Hotels & restaurants</option>
+        </select>
+      </div>
+      </div>
+      <hr>
+      <button class="submitBtn validate-photo-btn">Valider</button>
+    </form>
+  </div>
+</aside>
+
+<script type="module" src="./scripts/index.js"></script>
 </body>
 </html>

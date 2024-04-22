@@ -1,27 +1,27 @@
-import { logButton, isLoggedIn } from "./global.js";
+import { logButton, adminPage } from "./adminSession.js";
+/* import { escapeKeyModal } from "./modal.js";
+ */
+const log = document.querySelector(`a[href="login.html"]`);
 
-// Vérification de si l'utilisateur est connecté au chargement de la page
-isLoggedIn();
+// Récupération de l'élément du DOM qui accueillera les figures
+const gallerySection = document.querySelector(".gallery");
 
-// Affichage du bouton de connexion en fonction de l'état de connexion
-const log = document.querySelector(`a[href="pages/login.html"]`);
-logButton(log);
+// Fonction d'affichage par défaut de la page d'accueil
+export async function displayDefault() {
 
+  // Fonction pour récupérer les projets disponibles via l'API
+  function fetchWorksData() {
+    return fetch("http://localhost:5678/api/works")
+    .then(response => response.json())
+    .catch(() => alert("Une erreur est survenue."));
+  };
 
-async function displayDefault() {
   const worksData = await fetchWorksData();
   await displayWorks(worksData);
-}
-
-function fetchWorksData() {
-  return fetch("http://localhost:5678/api/works")
-  .then(response => response.json())
-  .catch(() => alert("Une erreur est survenue."));
 };
 
+// Fonction permettant d'afficher les projets récupérés, à déplacer dans display default
 async function displayWorks(worksData) {
-  // Récupération de l'élément du DOM qui accueillera les figures
-  const gallerySection = document.querySelector(".gallery");
   // Effacer le contenu de la galerie précédente
   gallerySection.innerHTML = ""
 
@@ -41,6 +41,7 @@ async function displayWorks(worksData) {
   };
 };
 
+// Fonction pour afficher les boutons filtres et filtrer par catégorie
 function displayButtons() {
   fetch("http://localhost:5678/api/categories")
   .then(categories => categories.json())
@@ -68,35 +69,44 @@ function displayButtons() {
     filters.querySelectorAll(".filter-btn").forEach(button => {
       button.addEventListener("click", function() {
         const categoryId = button.getAttribute("data-category-id");
-        filterWorksByCategory(categoryId);
+        if (!categoryId) {
+          displayDefault();
+        } else {
+          fetch(`http://localhost:5678/api/works`)
+          .then(worksData => worksData.json())
+          .then(worksData => {
+            const filteredWorks = worksData.filter((work) => work.categoryId == categoryId);
+            if (filteredWorks.length > 0) {
+              displayWorks(filteredWorks);
+            } else {
+              gallerySection.innerHTML = `<div class="empty-works">Pas de projet actuellement disponible dans cette catégorie.</div>`;
+            };
+          })
+          .catch(() => alert("Une erreur est survenue."));
+        }
       });
     });
   })
   .catch(() => alert("Une erreur est survenue."));
 };
 
-function filterWorksByCategory(categoryId) {
-  fetch(`http://localhost:5678/api/works`)
-  .then(worksData => worksData.json())
-  .then(worksData => {
-    const filteredWorks = worksData.filter((work) => work.categoryId == categoryId);
-
-    displayWorks(filteredWorks);
-
-    !filteredWorks.length && displayDefault();
-  })
-  .catch(() => alert("Une erreur est survenue."));
-};
-
 // Fonction de déconnexion
-const logoutBtn = document.getElementById("logout");
-logoutBtn.addEventListener("click", logout);
-
 function logout() {
   localStorage.removeItem("token");
-  window.location.href = "./pages/login.html";
+  window.location.href = "login.html";
 };
+
+// Affichage du bouton de connexion en fonction de l'état de connexion
+logButton(log);
 
 // Démarrer l'affichage par défaut
 displayDefault();
 displayButtons();
+
+const logoutBtn = document.getElementById("logout");
+logoutBtn.addEventListener("click", logout);
+
+adminPage();
+
+/* escapeKeyModal();
+ */
