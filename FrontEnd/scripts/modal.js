@@ -213,6 +213,7 @@ document.querySelector(".validate-photo-btn").addEventListener("click", async (e
       alert("Le projet a été ajouté avec succès.");
       imagePreview.remove();
       inputPhotoInfos.style.display = "flex";
+      displayDefault();
       closeModal();
       document.getElementById("titleInput").value = "";
       document.getElementById("photoInput").value = "";
