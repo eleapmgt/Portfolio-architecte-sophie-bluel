@@ -3,7 +3,7 @@ const log = document.querySelector(`a[href="login.html"]`);
 // Gestion des erreurs
 const errorLogin = document.querySelector(".errorLogin");
 
-// Au clic, désactivation du lien cliquable de login
+// Au clic, désactivation du lien cliquable de login dans le menu
 const loginLink = document.querySelector(`a[href="login.html"]`);
 loginLink.addEventListener("click", (event) => {
   event.preventDefault();
