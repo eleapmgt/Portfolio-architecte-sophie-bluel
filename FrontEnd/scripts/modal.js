@@ -20,17 +20,6 @@ export async function openModal() {
     .addEventListener("click", (event) => {
       event.stopPropagation();
     });
-
-  // Retour à l'affichage de la modale 1 au clic sur la flèche
-  document.querySelector(".arrow-backward").addEventListener("click", () => {
-    modalAddPhoto.style.display = "none";
-    modalGallery.style.display = "flex";
-    imagePreview.remove();
-    inputPhotoInfos.style.display = "flex";
-    document.getElementById("titleInput").value = "";
-    document.getElementById("photoInput").value = "";
-    displayWorksInModal(worksData);
-  });
 };
 
 // Fonction pour récupérer les données des projets
@@ -133,6 +122,19 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
+// Ajout des catégories à sélectionner dans le formulaire
+fetch("http://localhost:5678/api/categories")
+.then(categories => categories.json())
+.then(categories => {
+  const categorySelect = document.getElementById("categorySelect");
+  for (let i = 0; i < categories.length; i++) {
+    const selectOption = document.createElement("option");
+    categorySelect.appendChild(selectOption);
+    selectOption.value = categories[i].id;
+    selectOption.innerText = categories[i].name;
+  }
+})
+
 // Affichage de la modale 2 au clic sur le bouton Ajouter une photo
 document.querySelector(".add-photo-btn").addEventListener("click", () => {
   modalGallery.style.display = "none";
@@ -144,7 +146,6 @@ document.querySelector(".add-photo-btn").addEventListener("click", () => {
     .querySelector("#modal-add .closeModalBtn")
     .addEventListener("click", closeModal);
 });
-
 
 // Prévisualisation de l'image chargée dans le formulaire
 const photoInput = document.getElementById("photoInput");
@@ -163,6 +164,16 @@ photoInput.addEventListener("change", () => {
     inputPhotoInfos.style.display = "none";
     formInputPhoto.appendChild(imagePreview);
   };
+});
+
+// Retour à l'affichage de la modale 1 au clic sur la flèche
+document.querySelector(".arrow-backward").addEventListener("click", () => {
+  modalAddPhoto.style.display = "none";
+  modalGallery.style.display = "flex";
+  imagePreview.remove();
+  inputPhotoInfos.style.display = "flex";
+  document.getElementById("titleInput").value = "";
+  document.getElementById("photoInput").value = "";
 });
 
 // Envoi d'un nouveau projet au back-end
@@ -189,8 +200,6 @@ document.querySelector(".validate-photo-btn").addEventListener("click", async (e
   formData.append("category", category);
   formData.append("image", image);
 
-  console.log("token", localStorage.getItem("token"));
-
   try {
     const response = await fetch("http://localhost:5678/api/works", {
       method: "POST",
@@ -202,15 +211,15 @@ document.querySelector(".validate-photo-btn").addEventListener("click", async (e
     });
     if (response.ok) {
       alert("Le projet a été ajouté avec succès.");
-      displayDefault();
       imagePreview.remove();
       inputPhotoInfos.style.display = "flex";
+      closeModal();
       document.getElementById("titleInput").value = "";
+      document.getElementById("photoInput").value = "";
     } else {
-      alert("1. Une erreur s'est produite lors de l'ajout du projet.")
+      alert("Une erreur s'est produite lors de l'ajout du projet.")
     }
   } catch (error) {
-    console.error("Erreur lors de l'ajout du projet :", error);
-    alert("2. Une erreur s'est produite lors de l'ajout du projet.");
+    alert("Une erreur s'est produite lors de l'ajout du projet.");
   };
 });
