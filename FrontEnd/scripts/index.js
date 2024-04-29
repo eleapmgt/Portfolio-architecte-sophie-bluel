@@ -46,12 +46,6 @@ function displayButtons() {
       // Récupération de l'élément du DOM qui accueillera les buttons
       const filters = document.querySelector(".filters");
 
-      // Ajout du button "Tous" à la structure HTML
-      const btnAll = document.createElement("button");
-      btnAll.className = "filter-btn btn-all";
-      btnAll.innerText = "Tous";
-      filters.appendChild(btnAll);
-
       // Création et ajout des buttons à la structure HTML
       for (let i = 0; i < categories.length; i++) {
         const categoryName = categories[i].name;
@@ -66,6 +60,11 @@ function displayButtons() {
       // Au clic sur un filtre, affichage des projets concernés
       filters.querySelectorAll(".filter-btn").forEach((button) => {
         button.addEventListener("click", function () {
+          filters.querySelectorAll(".filter-btn").forEach((btn) => {
+            btn.classList.remove("active");
+          });
+          button.classList.add("active");
+
           const categoryId = button.getAttribute("data-category-id");
           // Si la catégorie n'a pas d'id, displayDefault()
           if (!categoryId) {

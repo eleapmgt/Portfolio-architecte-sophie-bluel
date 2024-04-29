@@ -188,7 +188,7 @@ nav li img[alt="Instagram"] {
   padding: 0 12px;
 }
 
-.filter-btn:hover {
+.filter-btn.active {
   background-color: #1D6154;
   color: white;
 }
