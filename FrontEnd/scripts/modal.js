@@ -1,9 +1,26 @@
 import { displayDefault } from "./index.js";
 
+/**
+ * @typedef {Array<object>} worksData - Un tableau d'objets représentant des projets.
+ * @property {number} id - L'identifiant du projet.
+ * @property {string} title - Le titre du projet.
+ * @property {string} imageUrl - L'URL de l'image du projet.
+ * @property {number} categoryId - L'identifiant de la catégorie du projet.
+ * @property {number} userId - L'identifiant de l'utilisateur associé au projet.
+ * @property {object} category - L'objet représentant la catégorie du projet.
+ * @property {number} category.id - L'identifiant de la catégorie.
+ * @property {string} category.name - Le nom de la catégorie.
+ */
+
 const modalAddPhoto = document.querySelector(".modal-add-photo");
 const modalGallery = document.querySelector(".modal-photo-gallery");
 
-// Fonction d'ouverture de la modale
+/**
+ * Fonction ouvrant la modale
+ * @returns {Promise<void>} - Promesse résolue quand le modale est ouverte.
+ * @description Récupération des données disponibles via une API puis affichage de la modale avec les données récupérées.
+ * Ajout d'écouteurs d'événements pour la fermeture de la modale.
+ */
 export async function openModal() {
   const modal = document.getElementById("modal");
   const worksData = await fetchWorksData();
@@ -20,9 +37,15 @@ export async function openModal() {
     .addEventListener("click", (event) => {
       event.stopPropagation();
     });
-};
+}
 
-// Fonction pour récupérer les données des projets
+/**
+ * Requête pour récupérer les projets disponibles via l'API
+ * @returns {Promise<worksData>} Données des projets au format JSON ou alerte en cas d'erreur.
+ * @description Cette fonction envoie une requête à l'URL spécifiée pour récupérer les données des projets.
+ * Si la requête réussit, elle retourne une promesse résolue avec les données des projets au format JSON.
+ * Si une erreur survient lors de la requête, une alerte est affichée pour informer l'utilisateur.
+ */
 function fetchWorksData() {
   return fetch("http://localhost:5678/api/works")
     .then((response) => response.json())
@@ -30,17 +53,17 @@ function fetchWorksData() {
 }
 
 // Fonction pour afficher les projets dans la modale 1
+/**
+ * @param {Array<worksData>} worksData - Les données des projets à afficher.
+ * @returns {Promise<void>} - Une promesse résolue lorsque l'affichage est terminé ou une promesse rejetée si une erreur survient pendant l'affichage.
+ */
 async function displayWorksInModal(worksData) {
   try {
     const modalContent = document.querySelector(".admin-gallery");
-
-    // Effacer le contenu précédent de la modale
     modalContent.innerHTML = "";
 
-    // Création des éléments HTML pour chaque projet et ajout à la modale
     for (let i = 0; i < worksData.length; i++) {
       const work = worksData[i];
-      // Création des éléments HTML pour afficher chaque projet
       const figureElement = document.createElement("figure");
       const imageElement = document.createElement("img");
       const imageTrashIcon = document.createElement("div");
@@ -51,7 +74,6 @@ async function displayWorksInModal(worksData) {
       imageTrashIcon.classList = "imageTrashIcon";
       imageTrashIcon.innerHTML = `<i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>`;
 
-      // Ajout des éléments à la galerie
       modalContent.appendChild(figureElement);
       figureElement.appendChild(imageElement);
       figureElement.appendChild(imageTrashIcon);
@@ -65,7 +87,11 @@ async function displayWorksInModal(worksData) {
   }
 }
 
-// Fonction permettant de gérer la suppression d'un projet
+/**
+ * Fonction gérant la suppression d'un projet
+ * @param {number} workId - L'identifiant du projet à supprimer.
+ * @returns {Promise<void>} - Une promesse résolue lorsque la suppression est terminée ou une promesse rejetée si une erreur survient lors de la suppression.
+ */
 async function deleteWorkHandler(workId) {
   const confirmation = confirm(
     "Êtes-vous sûr de vouloir supprimer ce projet ?"
@@ -84,7 +110,11 @@ async function deleteWorkHandler(workId) {
   }
 }
 
-// Fonction pour supprimer un projet
+/**
+ * Fonction supprimant un projet du serveur
+ * @param {number} workId - L'identifiant du projet à supprimer.
+ * @returns {Promise<boolean>} - Une promesse résolue avec True si la suppression est réussie ou une promesse résolue avec False si la suppression échoue ou une erreur survient.
+ */
 async function deleteWork(workId) {
   try {
     const token = localStorage.getItem("token");
@@ -105,7 +135,10 @@ async function deleteWork(workId) {
   }
 }
 
-// Fonction de fermeture de la modale
+/**
+ * Fonction gérant la fermeture de la modale
+ * @returns {void}
+ */
 function closeModal() {
   modalGallery.style.display = "flex";
   modalAddPhoto.style.display = "none";
@@ -124,16 +157,16 @@ window.addEventListener("keydown", (event) => {
 
 // Ajout des catégories à sélectionner dans le formulaire
 fetch("http://localhost:5678/api/categories")
-.then(categories => categories.json())
-.then(categories => {
-  const categorySelect = document.getElementById("categorySelect");
-  for (let i = 0; i < categories.length; i++) {
-    const selectOption = document.createElement("option");
-    categorySelect.appendChild(selectOption);
-    selectOption.value = categories[i].id;
-    selectOption.innerText = categories[i].name;
-  }
-})
+  .then((categories) => categories.json())
+  .then((categories) => {
+    const categorySelect = document.getElementById("categorySelect");
+    for (let i = 0; i < categories.length; i++) {
+      const selectOption = document.createElement("option");
+      categorySelect.appendChild(selectOption);
+      selectOption.value = categories[i].id;
+      selectOption.innerText = categories[i].name;
+    }
+  });
 
 // Affichage de la modale 2 au clic sur le bouton Ajouter une photo
 document.querySelector(".add-photo-btn").addEventListener("click", () => {
@@ -157,13 +190,13 @@ photoInput.addEventListener("change", () => {
     imagePreview.id = "imagePreview";
     imagePreview.alt = "Aperçu de l'image";
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
       imagePreview.src = e.target.result;
     };
     reader.readAsDataURL(photoInput.files[0]);
     inputPhotoInfos.style.display = "none";
     formInputPhoto.appendChild(imagePreview);
-  };
+  }
 });
 
 // Retour à l'affichage de la modale 1 au clic sur la flèche
@@ -177,50 +210,51 @@ document.querySelector(".arrow-backward").addEventListener("click", () => {
 });
 
 // Envoi d'un nouveau projet au back-end
-document.querySelector(".validate-photo-btn").addEventListener("click", async (event) => {
-  event.preventDefault();
+document
+  .querySelector(".validate-photo-btn")
+  .addEventListener("click", async (event) => {
+    event.preventDefault();
 
-  const title = document.getElementById("titleInput").value;
-  const category = parseInt(document.getElementById("categorySelect").value);
-  const image = document.getElementById("photoInput").files[0];
+    const title = document.getElementById("titleInput").value;
+    const category = parseInt(document.getElementById("categorySelect").value);
+    const image = document.getElementById("photoInput").files[0];
 
-
-  if (!title || !category || !image) {
-    alert("Veuillez remplir tous les champs du formulaire.")
-    return;
-  };
-
-  if (image.size > 4 * 1024 * 1024) {
-    alert("La taille de l'image de ne doit pas dépasser 4 Mo.");
-    return;
-  };
-
-  const formData = new FormData();
-  formData.append("title", title);
-  formData.append("category", category);
-  formData.append("image", image);
-
-  try {
-    const response = await fetch("http://localhost:5678/api/works", {
-      method: "POST",
-      body: formData,
-      headers: {
-        "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-      },
-    });
-    if (response.ok) {
-      alert("Le projet a été ajouté avec succès.");
-      imagePreview.remove();
-      inputPhotoInfos.style.display = "flex";
-      displayDefault();
-      closeModal();
-      document.getElementById("titleInput").value = "";
-      document.getElementById("photoInput").value = "";
-    } else {
-      alert("Une erreur s'est produite lors de l'ajout du projet.")
+    if (!title || !category || !image) {
+      alert("Veuillez remplir tous les champs du formulaire.");
+      return;
     }
-  } catch (error) {
-    alert("Une erreur s'est produite lors de l'ajout du projet.");
-  };
-});
+
+    if (image.size > 4 * 1024 * 1024) {
+      alert("La taille de l'image de ne doit pas dépasser 4 Mo.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("category", category);
+    formData.append("image", image);
+
+    try {
+      const response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      if (response.ok) {
+        alert("Le projet a été ajouté avec succès.");
+        imagePreview.remove();
+        inputPhotoInfos.style.display = "flex";
+        displayDefault();
+        closeModal();
+        document.getElementById("titleInput").value = "";
+        document.getElementById("photoInput").value = "";
+      } else {
+        alert("Une erreur s'est produite lors de l'ajout du projet.");
+      }
+    } catch (error) {
+      alert("Une erreur s'est produite lors de l'ajout du projet.");
+    }
+  });

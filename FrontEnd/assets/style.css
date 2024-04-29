@@ -3,39 +3,117 @@
   License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 
 body {
-	line-height: 1;
+  line-height: 1;
 }
 
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
 
 a {
@@ -43,38 +121,42 @@ a {
   color: black;
 }
 
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
 
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
-	font-size: 14px;
-  background-color: #FFFEF8;
+  max-width: 1140px;
+  margin: auto;
+  font-family: "Work Sans";
+  font-size: 14px;
+  background-color: #fffef8;
 }
 
-header, main {
+header,
+main {
   padding: 0 10%;
 }
 
 header {
-	display: flex;
-	justify-content: space-between;
-	margin: 50px 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
 }
 
 header a:hover {
@@ -82,7 +164,7 @@ header a:hover {
 }
 
 section {
-	margin: 50px 0;
+  margin: 50px 0;
 }
 
 button,
@@ -92,41 +174,41 @@ i,
   cursor: pointer;
 }
 
-h1{
-	display: flex;
-	flex-direction: column;
-	font-family: 'Syne';
-	font-size: 22px;
-	font-weight: 800;
-	color: #B1663C;
+h1 {
+  display: flex;
+  flex-direction: column;
+  font-family: "Syne";
+  font-size: 22px;
+  font-weight: 800;
+  color: #b1663c;
 }
 
 h1 > span {
-	font-family: 'Work Sans';
-	font-size:10px;
-	letter-spacing: 0.1em;
+  font-family: "Work Sans";
+  font-size: 10px;
+  letter-spacing: 0.1em;
 }
 
-h2{
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154;
+h2 {
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 30px;
+  color: #1d6154;
 }
 
 nav ul {
-	display: flex;
-	align-items: center;
-	list-style-type: none;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
 }
 
 nav li {
-	padding: 0 25px;
-	font-size: 1.2em;
+  padding: 0 25px;
+  font-size: 1.2em;
 }
 
 li:hover {
-	color: #B1663C;
+  color: #b1663c;
 }
 
 nav li img[alt="Instagram"] {
@@ -136,35 +218,35 @@ nav li img[alt="Instagram"] {
 }
 
 #introduction {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 #introduction figure {
-	flex: 1;
+  flex: 1;
 }
 
 #introduction img {
-	display: block;
-	margin: auto;
-	width: 80%;
+  display: block;
+  margin: auto;
+  width: 80%;
 }
 
 #introduction article {
-	flex: 1;
+  flex: 1;
 }
 
 #introduction h2 {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 #introduction p {
-	margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 #portfolio h2 {
-	text-align: center;
-	margin-bottom: 45px;
+  text-align: center;
+  margin-bottom: 45px;
 }
 
 .filters {
@@ -178,31 +260,31 @@ nav li img[alt="Instagram"] {
   font-family: "Syne";
   font-weight: 700;
   font-size: 16px;
-  color:#1D6154;
+  color: #1d6154;
   text-align: center;
-  background-color: #FFFEF8;
+  background-color: #fffef8;
   min-width: 100px;
   height: 37px;
   border-radius: 60px;
-  border: 1px solid #1D6154;
+  border: 1px solid #1d6154;
   padding: 0 12px;
 }
 
 .filter-btn.active {
-  background-color: #1D6154;
+  background-color: #1d6154;
   color: white;
 }
 
 .gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
 }
 
 .gallery img {
-	width: 100%;
+  width: 100%;
   height: 388px;
   object-fit: cover;
 }
@@ -213,58 +295,58 @@ nav li img[alt="Instagram"] {
 }
 
 .form-section > * {
-	text-align: center;
+  text-align: center;
 }
 
-.form-section h2{
-	margin-bottom: 20px;
+.form-section h2 {
+  margin-bottom: 20px;
 }
 
 .form-section form {
-	text-align: left;
-	margin-top:30px;
-	display: flex;
-	flex-direction: column;
+  text-align: left;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-section input {
   cursor: pointer;
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
 .form-section label {
-	margin: 2em 0 1em 0;
+  margin: 2em 0 1em 0;
 }
 
 .form-section textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
 input[type="submit"],
 .submitBtn {
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px;
+  font-family: "Syne";
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 2em auto;
+  width: 180px;
+  text-align: center;
+  border-radius: 60px;
 }
 
 input[type="submit"]:hover,
 .submitBtn:hover {
-  background-color: #A7A7A7;
+  background-color: #a7a7a7;
 }
 
 footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em;
+  display: flex;
+  justify-content: flex-end;
+  margin: 2em;
 }
 
 footer nav ul li {
@@ -369,7 +451,7 @@ footer nav ul li {
   width: 85%;
   height: 1px;
   border: none;
-  background-color: #B3B3B3;
+  background-color: #b3b3b3;
 }
 
 .add-photo-btn {
@@ -458,7 +540,7 @@ footer nav ul li {
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: #E8F1F6;
+  background-color: #e8f1f6;
   height: 170px;
 }
 
@@ -482,7 +564,7 @@ footer nav ul li {
 .form-input-photo label {
   padding: 10px 30px;
   border-radius: 50px;
-  background-color: #CBD6DC;
+  background-color: #cbd6dc;
   color: #306685;
   cursor: pointer;
 }
@@ -518,7 +600,7 @@ footer nav ul li {
 }
 
 .validate-photo-btn {
-  background-color: #1D6154;
+  background-color: #1d6154;
   margin: 10px 0 30px 0;
   padding: 15px;
   border: none;
@@ -526,7 +608,7 @@ footer nav ul li {
 }
 
 .validate-photo-btn:hover {
-  background-color: #A7A7A7;
+  background-color: #a7a7a7;
 }
 
 .add-photo-form hr {
@@ -539,6 +621,6 @@ footer nav ul li {
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='m7 10l5 5l5-5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat, repeat;
-  background-position: right .7em top 50%, 0 0;
+  background-position: right 0.7em top 50%, 0 0;
   background-size: 1.25em auto, 100%;
 }
